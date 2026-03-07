@@ -4,6 +4,10 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ═══════════════════════════════════════════════════════════════════
+   DESIGN TOKENS — Paleta centralizada do NordSternLab
+   EDITÁVEL: Altere cores aqui para mudar o tema inteiro
+   ═══════════════════════════════════════════════════════════════════ */
 @layer base {
   :root {
     --background: 215 30% 4%;
@@ -36,7 +40,7 @@
 
     --radius: 0.125rem;
 
-    /* ARG Custom Tokens */
+    /* ─── ARG Custom Tokens ─── */
     --cyan: 187 100% 50%;
     --cyan-dim: 187 100% 30%;
     --red-alert: 0 80% 55%;
@@ -74,8 +78,12 @@
   }
 }
 
-/* ===== SCANLINE OVERLAY ===== */
+/* ═══════════════════════════════════════════════════════════════════
+   COMPONENTES VISUAIS — Scanlines, Glitch, Badges, etc.
+   ═══════════════════════════════════════════════════════════════════ */
 @layer components {
+
+  /* ===== SCANLINE OVERLAY ===== */
   .scanlines {
     position: relative;
   }
@@ -153,6 +161,7 @@
   }
 
   /* ===== STATUS BADGES ===== */
+  /* EDITÁVEL: Cores dos badges de status */
   .badge-ativo {
     background: hsl(120 60% 15%);
     color: hsl(120 60% 65%);
@@ -183,6 +192,37 @@
     border: 1px solid hsl(var(--panel-border));
     border-left: 3px solid hsl(var(--primary));
     font-family: 'JetBrains Mono', monospace;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+  }
+
+  .terminal-box:hover {
+    border-color: hsl(var(--primary));
+    box-shadow: 0 0 15px hsl(var(--primary) / 0.1);
+  }
+
+  /* Micro-glitch sutil no terminal box ao hover */
+  .terminal-box::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      hsl(var(--primary) / 0.02) 50%,
+      transparent 100%
+    );
+    transform: translateX(-100%);
+    transition: transform 0.6s ease;
+    pointer-events: none;
+  }
+
+  .terminal-box:hover::after {
+    transform: translateX(100%);
   }
 
   /* ===== TYPING CURSOR ===== */
@@ -214,9 +254,10 @@
     letter-spacing: 1px;
     text-transform: uppercase;
     border-left: 2px solid transparent;
-    transition: all 0.15s ease;
+    transition: all 0.2s ease;
     text-decoration: none;
     cursor: pointer;
+    position: relative;
   }
 
   .sidebar-link:hover,
@@ -225,9 +266,25 @@
     border-left-color: hsl(var(--primary));
     background: hsl(var(--primary) / 0.05);
   }
+
+  /* Indicador de atividade na sidebar */
+  .sidebar-link.active::before {
+    content: '';
+    position: absolute;
+    right: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: hsl(var(--primary));
+    box-shadow: 0 0 6px hsl(var(--primary));
+  }
 }
 
-/* ===== KEYFRAMES ===== */
+/* ═══════════════════════════════════════════════════════════════════
+   KEYFRAMES — Animações do sistema
+   ═══════════════════════════════════════════════════════════════════ */
 @keyframes glitch-base {
   0%, 90%, 100% { transform: translate(0); }
   91% { transform: translate(-2px, 1px); }
@@ -283,4 +340,242 @@
 @keyframes rotate-slow {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
+}
+
+/* ===== Scanline rápida (boot) ===== */
+@keyframes scanline-fast {
+  0% { top: 0%; }
+  100% { top: 100%; }
+}
+
+.animate-scanline-fast {
+  animation: scanline-fast 0.5s linear infinite;
+}
+
+/* ===== Boot Overlay ===== */
+.glitch-overlay {
+  background: radial-gradient(circle, hsl(185 80% 4%) 0%, hsl(215 30% 2%) 100%);
+  border: 15px solid hsl(215 30% 2%);
+  box-shadow: inset 0 0 150px hsl(215 100% 5%);
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 3rem;
+}
+
+/* CRT grid lines no boot */
+.glitch-overlay::after {
+  content: " ";
+  display: block;
+  position: absolute;
+  top: 0; left: 0; bottom: 0; right: 0;
+  background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), 
+              linear-gradient(90deg, rgba(255, 0, 0, 0.05), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.05));
+  z-index: 10;
+  background-size: 100% 3px, 4px 100%;
+  pointer-events: none;
+  opacity: 0.4;
+}
+
+/* ===== Power On — Monitor ligando ===== */
+.animate-power-on {
+  animation: power-on 1.2s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+}
+
+@keyframes power-on {
+  0% {
+    transform: scale(1.1);
+    filter: brightness(5) blur(15px);
+    opacity: 0;
+  }
+  30% {
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+    filter: brightness(1) blur(0px);
+    opacity: 1;
+  }
+}
+
+/* ===== Power On P — CRT tube effect (user custom) ===== */
+.animate-power-onp {
+  animation: power-onp 1.5s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+}
+
+@keyframes power-onp {
+  0% { 
+    transform: scaleY(0.005) scaleX(0); 
+    filter: brightness(20);
+    opacity: 0;
+  }
+  40% { 
+    transform: scaleY(0.005) scaleX(1.2);
+    filter: brightness(5);
+    opacity: 1;
+  }
+  100% { 
+    transform: scaleY(1) scaleX(1);
+    filter: brightness(1);
+    opacity: 1;
+  }
+}
+
+/* ===== Glow para texto primary ===== */
+.text-primary {
+  text-shadow: 0 0 8px hsl(187 100% 50% / 0.5);
+}
+
+/* ===== Screen Flicker — Monitor CRT ===== */
+@keyframes screen-flicker {
+  0% { opacity: 0.97; }
+  5% { opacity: 0.95; }
+  10% { opacity: 0.9; }
+  15% { opacity: 0.98; }
+  30% { opacity: 0.95; }
+  50% { opacity: 0.98; }
+  70% { opacity: 0.94; }
+  100% { opacity: 0.98; }
+}
+
+.crt-vignette {
+  animation: screen-flicker 0.15s infinite;
+  box-shadow: inset 0 0 150px hsl(215 30% 2% / 0.9);
+}
+
+/* ===== Foto P&B ===== */
+.scientist-photo {
+  filter: grayscale(100%) contrast(1.2) brightness(0.9);
+  transition: all 0.5s ease;
+  object-fit: cover;
+}
+
+.scientist-photo:hover {
+  filter: grayscale(0%) contrast(1) brightness(1);
+}
+
+/* ===== Glass Crack Overlay (Volk) ===== */
+.glass-crack-overlay {
+  position: fixed;
+  inset: 0;
+  background-size: 100vw;
+  background-position: center;
+  background-repeat: no-repeat;
+  pointer-events: none;
+  z-index: 9999;
+  mix-blend-mode: screen;
+  /* Efeito de estática quando não há imagem */
+  background-color: hsl(0 0% 0% / 0.3);
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.15'/%3E%3C/svg%3E");
+}
+
+/* ===== System Glitch (distorção total) ===== */
+.system-glitch {
+  animation: glitch-vibration 0.2s infinite;
+  filter: hue-rotate(280deg) contrast(1.5) saturate(1.2);
+  transform: scale(1.02); 
+  overflow: hidden;
+}
+
+@keyframes glitch-vibration {
+  0% { transform: translate(0) scale(1.02); }
+  25% { transform: translate(-5px, 5px) scale(1.02); }
+  50% { transform: translate(5px, -5px) scale(1.02); }
+  75% { transform: translate(-5px, -5px) scale(1.02); }
+  100% { transform: translate(5px, 5px) scale(1.02); }
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   ANIMAÇÕES AVANÇADAS — Efeitos imersivos
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* Data corruption — texto com interferência */
+@keyframes data-corrupt {
+  0%, 95%, 100% { opacity: 1; transform: none; filter: none; }
+  96% { opacity: 0.8; transform: translateX(-3px) skewX(-2deg); filter: hue-rotate(90deg); }
+  97% { opacity: 0.6; transform: translateX(3px) skewX(2deg); filter: hue-rotate(-90deg); }
+  98% { opacity: 0.9; transform: translateX(-1px); filter: saturate(2); }
+}
+
+.animate-data-corrupt {
+  animation: data-corrupt 8s infinite;
+}
+
+/* Horizontal scan bar */
+@keyframes h-scan {
+  0% { transform: translateY(-100%); opacity: 0; }
+  50% { opacity: 0.08; }
+  100% { transform: translateY(100vh); opacity: 0; }
+}
+
+.h-scan-bar {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 60px;
+  background: linear-gradient(to bottom, transparent, hsl(var(--primary) / 0.1), transparent);
+  pointer-events: none;
+  z-index: 50;
+  animation: h-scan 6s linear infinite;
+}
+
+/* Stagger fade in — para listas */
+.stagger-child {
+  opacity: 0;
+  transform: translateY(8px);
+  animation: fade-in-up 0.4s ease-out forwards;
+}
+
+/* Glow pulse para bordas */
+@keyframes border-glow {
+  0%, 100% { box-shadow: 0 0 4px hsl(var(--primary) / 0.2); }
+  50% { box-shadow: 0 0 12px hsl(var(--primary) / 0.4), 0 0 20px hsl(var(--primary) / 0.1); }
+}
+
+.animate-border-glow {
+  animation: border-glow 3s ease-in-out infinite;
+}
+
+/* Text scramble placeholder */
+@keyframes text-distort {
+  0%, 90%, 100% { filter: none; transform: none; }
+  92% { filter: blur(1px); transform: translateX(-1px); }
+  94% { filter: blur(0); transform: translateX(1px); }
+  96% { filter: blur(2px) hue-rotate(90deg); transform: skewX(-1deg); }
+  98% { filter: blur(0); transform: none; }
+}
+
+.animate-text-distort {
+  animation: text-distort 10s infinite;
+}
+
+/* Scale in para modais */
+@keyframes scale-in {
+  from { transform: scale(0.95); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+.animate-scale-in {
+  animation: scale-in 0.2s ease-out;
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   EASTER EGG — Puzzle oculto (Konami Code)
+   Ativado via JS — adiciona classe .konami-active ao body
+   ═══════════════════════════════════════════════════════════════════ */
+.konami-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  background: hsl(var(--background) / 0.95);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: fade-in-up 0.3s ease-out;
+  pointer-events: all;
 }
