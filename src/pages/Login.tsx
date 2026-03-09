@@ -1,6 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import { useNavigate } from "react-router-dom";
-import Anuncio from "src/pages/Anuncio";
+import { useNavigate } from "react-router-dom"
 
 // ─────────────────────────────────────────────────────────────────
 // EDITÁVEL: Logo — altere o caminho se necessário
