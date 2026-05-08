@@ -7,11 +7,11 @@ type Section = "home" | "func" | "relatorios" | "arquivos" | "videos" | "nz01" |
 
 const EMPLOYEES = [
   { name: "Daniel V.", sector: "Biosegurança", status: "ATIVO", statusClass: "badge-ativo", note: null },
-  { name: "Ingrid S.", sector: "Pesquisa", status: "LICENÇA", statusClass: "badge-licenca", note: "⚠ Afastamento médico — Gestação em curso. Ver ARQ-003." },
+  { name: "Ingrid S.", sector: "Biotecnologia", status: "LICENÇA", statusClass: "badge-licenca", note: "⚠ Afastamento médico — Gestação em curso. Ver ARQ-003." },
   { name: "Volk L.", sector: "Diretoria", status: "INATIVO", statusClass: "badge-inativo", note: null },
   { name: "████████", sector: "—", status: "ARQUIVADO", statusClass: "badge-arquivado", note: "COFEE-0: Identidade suprimida. [INFILTRAÇÃO DETECTADA]." },
   { name: "Heinz K.", sector: "Biosegurança", status: "ATIVO", statusClass: "badge-ativo", note: null },
-  { name: "Ida S.", sector: "Biotecnologia", status: "ATIVO", statusClass: "badge-ativo", note: null },
+  { name: "Ida S.", sector: "Pesquisa", status: "ATIVO", statusClass: "badge-ativo", note: null },
 ];
 
 const REPORTS = [
