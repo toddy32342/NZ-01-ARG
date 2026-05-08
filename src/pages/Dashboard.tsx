@@ -227,7 +227,7 @@ export default function Dashboard() {
             <div className="space-y-6 animate-fade-in-up">
               <div className="flex items-center gap-4"><h2 className="text-xs font-bold tracking-widest text-primary uppercase">Painel Geral</h2><div className="flex-1 h-px bg-border" /></div>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                {[{l:"STATUS",v:"ATIVO",p:true},{l:"MONITORAMENTO",v:"ONLINE",p:true},{l:"ACESSOS",v:"29",p:false}].map((s,i) => (
+                {[{l:"STATUS",v:"ATIVO",p:true},{l:"MONITORAMENTO",v:"ONLINE",p:true},{l:"ACESSOS",v:"--",p:false}].map((s,i) => (
                   <div key={i} className="terminal-box p-4 space-y-1">
                     <div className="text-xs text-muted-foreground">{s.l}</div>
                     <div className="flex items-center gap-2">{s.p && <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />}<span className={`font-bold text-sm ${s.p?"text-primary":"text-foreground"}`}>{s.v}</span></div>
