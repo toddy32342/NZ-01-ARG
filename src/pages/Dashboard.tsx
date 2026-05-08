@@ -7,11 +7,11 @@ type Section = "home" | "func" | "relatorios" | "arquivos" | "videos" | "nz01" |
 
 const EMPLOYEES = [
   { name: "Daniel V.", sector: "Biosegurança", status: "ATIVO", statusClass: "badge-ativo", note: null },
-  { name: "Ingrid S.", sector: "Biotecnologia", status: "LICENÇA", statusClass: "badge-licenca", note: "⚠ Afastamento médico — Gestação em curso. Ver ARQ-003." },
+  { name: "Ingrid S.", sector: "Pesquisa", status: "LICENÇA", statusClass: "badge-licenca", note: "⚠ Afastamento médico — Gestação em curso. Ver ARQ-003." },
   { name: "Volk L.", sector: "Diretoria", status: "INATIVO", statusClass: "badge-inativo", note: null },
   { name: "████████", sector: "—", status: "ARQUIVADO", statusClass: "badge-arquivado", note: "COFEE-0: Identidade suprimida. [INFILTRAÇÃO DETECTADA]." },
   { name: "Heinz K.", sector: "Biosegurança", status: "ATIVO", statusClass: "badge-ativo", note: null },
-  { name: "Ida S.", sector: "Pesquisa", status: "ATIVO", statusClass: "badge-ativo", note: null },
+  { name: "Ida S.", sector: "Biotecnologia", status: "ATIVO", statusClass: "badge-ativo", note: null },
 ];
 
 const REPORTS = [
@@ -238,7 +238,7 @@ export default function Dashboard() {
                 <div className="text-xs font-bold text-alert-yellow tracking-widest">⚠ INCONSISTÊNCIA — COFEE-0</div>
                 <p className="text-xs text-muted-foreground mt-2">Registros com inconsistências. Investigação pendente.</p>
               </div>
-              <div className="terminal-box p-4"><div className="text-xs text-muted-foreground tracking-widest uppercase mb-2">IMAGEM DO LABORATÓRIO</div><div className="aspect-[21/9] bg-secondary border border-border flex items-center justify-center"><div className="text-xs text-muted-foreground opacity-40"><img src={LaboratorioImg} alt="Laboratório" className="mb-2" />Foto retirada no inicio das pesquisas.</div></div></div>
+              <div className="terminal-box p-4"><div className="text-xs text-muted-foreground tracking-widest uppercase mb-2">IMAGEM DO LABORATÓRIO</div><div className="aspect-[21/9] bg-secondary border border-border flex items-center justify-center"><div className="text-xs text-muted-foreground opacity-40"><img src={LaboratorioImg} alt="Laboratório" className="mb-2" />Foto retirada no inicio das pesquisa.</div></div></div>
               <div className="space-y-3">
                 <h3 className="text-xs font-bold tracking-widest text-primary uppercase">Boletins Internos</h3>
                 {NEWS.filter(n => level >= n.level).map(n => (
