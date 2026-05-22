@@ -9,11 +9,11 @@ import ida from "@/assets/ida.png"
 
 const employees = [
   { id: "daniel", name: "Daniel V.", sector: "Biosegurança", status: "ATIVO", statusClass: "badge-ativo", img: daniel },
-  { id: "ingrid", name: "Ingrid S.", sector: "Biotecnologia", status: "EM LICENÇA", statusClass: "badge-licenca", img: ingrid },
+  { id: "ingrid", name: "Ingrid S.", sector: "Pesquisa", status: "EM LICENÇA", statusClass: "badge-licenca", img: ingrid },
   { id: "volk", name: "Volk", sector: "Diretor", status: "INATIVO", statusClass: "badge-inativo", img: vulk },
   { id: "redacted", name: "████████", sector: "—", status: "ARQUIVADO", statusClass: "badge-arquivado", img: null, redacted: true },
   { id: "heinz", name: "Heinz K.", sector: "Biosegurança", status: "ATIVO", statusClass: "badge-ativo", img: heinz },
-  { id: "ida", name: "Ida S.", sector: "Pesquisa", status: "ATIVO", statusClass: "badge-ativo", img: ida },
+  { id: "ida", name: "Ida S.", sector: "Biotecnologia", status: "ATIVO", statusClass: "badge-ativo", img: ida },
 ]
 function useTypewriter(text: string, speed = 40) {
   const [displayed, setDisplayed] = useState("");
