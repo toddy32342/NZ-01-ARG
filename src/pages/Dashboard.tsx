@@ -36,7 +36,7 @@ const YOUTUBE_VIDEOS = [
     id: "VID-002", 
     title: "Incidente — CAM-03", 
     description: "Registro: falha crítica.", 
-    youtubeId: "", 
+    youtubeId: "spwWv8LmBs4IYGAr", 
     date: "2028-02-11", // <-- ESTA É A MUDANÇA MAIS IMPORTANTE
     level: 3 
   },
